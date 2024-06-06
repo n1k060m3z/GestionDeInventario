@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Productos</title>
+    <style>
+        body{
+            background-color: rgb(127, 133, 140);
+            margin: 0;
+            background-image: url("https://img.freepik.com/fotos-premium/inventario-grande-almacene-accion-mercancias-fondo-logistico-bandera-envio_43300-349.jpg");
+            background-size: cover; 
+            background-repeat: no-repeat;
+        }
+        #form1{
+            width : 400px;
+            height: 230px;
+            margin:  auto;
+            background-color: aquamarine;
+            padding: 50px 60 px 70px;
+            text-align: center;
+            border-radius: 16px;
+            
+        }
+        #form2{
+            width : 400px;
+            height: 70px;
+            background-color: aquamarine;
+            padding: 50px 60 px 70px;
+            text-align: center;
+            border-radius: 16px;
+        }
+        #form3{
+            width : 400px;
+            height: 70px;
+            margin:  auto;
+            background-color: aquamarine;
+            padding: 50px 60 px 70px;
+            text-align: center;
+            border-radius: 16px;
+            position: relative;
+            bottom: 135px;
+        }
+        #form4{
+            text-align: center;
+            position: relative;
+            bottom: 90px;
+        }
+        #form5{
+            width : 400px;
+            height: 30px;
+            margin:  auto;
+            background-color: aquamarine;
+            padding: 50px 60 px 70px;
+            text-align: center;
+            border-radius: 16px;
+            position: relative;
+            left: 450px;
+            bottom: 355px;
+        }
+        h1{
+            text-align: center;
+            width: 800px;
+            margin: 0 auto;
+            font-family: Helvetica;
+            font-size: 50px;
+            font-weight: bold;
+            color: #140f07;
+        }
+        .registrar{
+            text-align: center;
+        }
+        .agregar{
+            position: relative;
+            left: 100px;
+            
+        }
+        .retirar{
+            position: relative;
+            left: 600px;
+            bottom: 130px;
+            
+        }
+        .consultar{
+            position: relative;
+            left: 1000px;
+            bottom: 350px;
+            
+        }
+        .calcular{
+            text-align: center;
+            position: relative;
+            bottom: 80px;
+            
+        }
+        .mensaje{
+            position: relative;
+            bottom: 280px;
+            
+        }
+        .p1{
+            position: relative;
+            bottom: 280px;
+            
+        }
+        .lista{
+            position: relative;
+            bottom: 280px;
+            
+        }
+        a{
+            position: relative;
+            left: 1170px;
+            bottom: 800px;
+            
+        }
+        ul{
+            position: relative;
+            bottom: 280px;
+            
+        }
+        .informacion{
+            position: relative;
+            bottom: 280px;
+            
+        }
+        p{
+            position: relative;
+            bottom: 280px;
+            
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Gestión de Productos</h1>
+    
+    <h2 class="registrar">Registrar Producto</h2>
+    <form action="/registrar_producto" method="post" id="form1">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required><br><br>
+        <label for="descripcion">Descripción:</label>
+        <input type="text" id="descripcion" name="descripcion" required><br><br>
+        <label for="precio">Precio:</label>
+        <input type="number" id="precio" name="precio" step="0.01" required><br><br>
+        <label for="stock_inicial">Stock Inicial:</label>
+        <input type="number" id="stock_inicial" name="stock_inicial" required><br><br>
+        <label for="categoria">Categoría:</label>
+        <input type="text" id="categoria" name="categoria" required><br><br>
+        <label for="categoria">Proveedores:</label>
+        <input type="text" id="proveedor" name="proveedor" required><br><br>
+        <input type="submit" name="registrar" value="Registrar">
+    </form>
+
+    <h2 class="agregar">Agregar Stock</h2>
+    <form action="/registrar_producto" method="post" id="form2">
+        <label for="nombre">Nombre del Producto:</label>
+        <input type="text" id="nombre" name="nombre" required><br><br>
+        <label for="cantidad">Cantidad a Agregar:</label>
+        <input type="number" id="cantidad" name="cantidad" required><br><br>
+        <input type="submit" name="agregar_stock" value="Agregar">
+    </form>
+
+    <h2 class="retirar">Retirar Stock</h2>
+    <form action="/registrar_producto" method="post" id="form3">
+        <label for="nombre">Nombre del Producto:</label>
+        <input type="text" id="nombre" name="nombre" required><br><br>
+        <label for="cantidad">Cantidad a Retirar:</label>
+        <input type="number" id="cantidad" name="cantidad" required><br><br>
+        <input type="submit" name="retirar_stock" value="Retirar">
+    </form>
+
+    <h2 class="calcular">Calcular Valor Total del Stock</h2>
+    <form action="/registrar_producto" method="post" id="form4">
+        <input type="submit" name="calcular_valor_total" value="Calcular Valor Total">
+    </form>
+
+    <h2 class="consultar">Consultar Producto</h2>
+    <form action="/registrar_producto" method="post" id="form5">
+        <label for="nombre">Nombre del Producto:</label>
+        <input type="text" id="nombre" name="nombre" required><br><br>
+        <input type="submit" name="consultar_producto" value="Consultar">
+    </form>
+
+    <h3 class="mensaje">Mensaje:</h3>
+    <p class="p1">{{ mensaje }}</p>
+
+    {% if producto %}
+        <h3 class="informacion">Información del Producto</h3>
+        <p>Nombre: {{ producto.nombre }}</p>
+        <p>Descripción: {{ producto.descripcion }}</p>
+        <p>Precio: {{ producto.precio }}</p>
+        <p>Stock: {{ producto.stock }}</p>
+        <p>Categoría: {{ producto.categoria }}</p>
+        <p>Proveedor: {{ producto.proveedor }}</p>
+    {% endif %}
+    
+    <h3 class="lista">Lista de Productos</h3>
+    <ul>
+        {% for prod in productos %}
+            <li>{{ prod.nombre }} - Stock: {{ prod.stock }}</li>
+        {% endfor %}
+    </ul>
+    <a class href="/">Volver al inicio</a>
+</body>
+</html>

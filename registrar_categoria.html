@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar Categoría</title>
+    <style>
+        body{
+            background-color: rgb(127, 133, 140);
+            margin: 0;
+            background-image: url("https://img.freepik.com/fotos-premium/inventario-grande-almacene-accion-mercancias-fondo-logistico-bandera-envio_43300-349.jpg");
+            background-size: cover; 
+            background-repeat: no-repeat;
+        }
+        #form1{
+            width : 400px;
+            height: 50px;
+            margin:  auto;
+            background-color: aquamarine;
+            padding: 50px 60 px 70px;
+            text-align: center;
+            border-radius: 16px;
+        
+        }
+        #form2{
+            width : 400px;
+            height: 50px;
+            background-color: aquamarine;
+            padding: 50px 60 px 70px;
+            text-align: center;
+            border-radius: 16px;
+            position: relative;
+            top: 30px;
+        }
+        #form3{
+            width : 400px;
+            height: 30px;
+            margin:  auto;
+            background-color: aquamarine;
+            padding: 50px 60 px 70px;
+            text-align: center;
+            border-radius: 16px;
+            position: relative;
+            bottom: 80px;
+            left: 300px;
+        }
+        .registrar{
+        text-align: center;
+        }
+        .cr{
+            position: relative;
+            top: 300px;
+            left: 60px;
+        }
+        .p1{
+            position: relative;
+            top: 300px;
+            left: 60px;
+        }
+        
+
+        .agregar{
+            position: relative;
+            top: 30px;
+            left: 60px;
+        }
+        .consultar{
+            position: relative;
+            bottom: 80px;
+            left: 870px;
+        }
+        .detalle{
+            position: relative;
+            bottom: 30px;
+            left: 400px;
+        }
+        .p2{
+            position: relative;
+            bottom: 30px;
+            left: 400px;
+        }
+        a{
+            position: relative;
+            left: 1170px;
+            bottom: 800px;
+            
+        }
+
+    </style>
+</head>
+<body>
+    <h1 class="registrar">Registrar Categoría</h1>
+    <form action="/registrar_categoria" method="post" id="form1">
+        <input type="hidden" name="action" value="registrar">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required><br>
+        <label for="descripcion">Descripción:</label>
+        <input type="text" id="descripcion" name="descripcion" required><br><br>
+        <input type="submit" value="Registrar">
+    </form>
+
+    {% if categoria %}
+        <h2 class="cr">Categoría Registrada:</h2>
+        <p class="p1">Nombre: {{ categoria.nombre }}</p>
+        <p class="p1">Descripción: {{ categoria.descripcion }}</p>
+    {% endif %}
+
+    <h2 class="agregar">Agregar Producto a Categoría</h2>
+    <form action="/registrar_categoria" method="post" id="form2">
+        <input type="hidden" name="action" value="agregar_producto">
+        <label for="categoria">Selecciona una Categoría:</label>
+        <select id="categoria" name="categoria" required>
+            {% for cat in categorias %}
+                <option value="{{ cat.nombre }}">{{ cat.nombre }}</option>
+            {% endfor %}
+        </select><br>
+        <label for="nombre_producto">Nombre del Producto:</label>
+        <input type="text" id="nombre_producto" name="nombre_producto" required><br><br>
+        <input type="submit" value="Agregar Producto">
+    </form>
+
+    <h2 class="consultar">Consultar Categoría</h2>
+    <form action="/registrar_categoria" method="post" id="form3">
+        <input type="hidden" name="action" value="consultar">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required><br><br>
+        <input type="submit" value="Consultar">
+    </form>
+
+    {% if categoria %}
+        <h2 class="detalle">Detalles de la Categoría</h2>
+        <p class="p2">Nombre: {{ categoria.nombre }}</p>
+        <p class="p2">Descripción: {{ categoria.descripcion }}</p>
+        <h3>Productos en esta categoría:</h3>
+        <ul>
+            {% for producto in categoria.productos %}
+                <li>{{ producto }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <h2>Categorías Registradas</h2>
+    <ul>
+        {% for cat in categorias %}
+            <li>{{ cat.nombre }}</li>
+        {% endfor %}
+    </ul>
+
+    <a href="/">Volver al inicio</a>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar Proveedor</title>
+    <style>
+        body{
+            background-color: rgb(127, 133, 140);
+            margin: 0;
+            background-image: url("https://img.freepik.com/fotos-premium/inventario-grande-almacene-accion-mercancias-fondo-logistico-bandera-envio_43300-349.jpg");
+            background-size: cover; 
+            background-repeat: no-repeat;
+        }
+        #form1{
+            width : 400px;
+            height: 70px;
+            background-color: aquamarine;
+            padding: 50px 60 px 70px;
+            text-align: center;
+            border-radius: 16px;
+            position: relative;
+            bottom: 20px;
+            left: 40px;
+        
+        }
+        #form2{
+            width : 400px;
+            height: 50px;
+            background-color: aquamarine;
+            padding: 50px 60 px 70px;
+            text-align: center;
+            border-radius: 16px;
+            position: relative;
+            bottom: 20px;
+            left: 30px;
+        }
+        #form3{
+            width : 400px;
+            height: 50px;
+            margin:  auto;
+            background-color: aquamarine;
+            padding: 50px 60 px 70px;
+            text-align: center;
+            border-radius: 16px;
+            position: relative;
+            bottom: 270px;
+            left: 300px;
+        }
+        #form4{
+            width : 400px;
+            height: 30px;
+            margin:  auto;
+            background-color: aquamarine;
+            padding: 50px 60 px 70px;
+            text-align: center;
+            border-radius: 16px;
+            position: relative;
+            bottom: 250px;
+            left: 300px;
+        }
+        .registrar{
+            position: relative;
+            left: 80px;
+        }
+        .agregar{
+            position: relative;
+            bottom: 5px;
+            left: 80px;
+        }
+        .eliminar{
+            position: relative;
+            bottom: 250px;
+            left: 820px;
+        }
+        .consultar{
+            position: relative;
+            bottom: 240px;
+            left: 870px;
+        }
+        a{
+            position: relative;
+            left: 1200px;
+            bottom: 350px;
+            
+        }
+        .informacion{
+            position: relative;
+            bottom: 150px;
+            
+        }
+        p{
+            position: relative;
+            bottom: 150px;
+            
+        }
+        h3{
+            position: relative;
+            bottom: 150px;
+            
+        }
+        ul{
+            position: relative;
+            bottom: 150px;
+            
+        }
+    </style>
+</head>
+<body>
+    <h1 class="registrar">Registrar Proveedor</h1>
+    <form action="/registrar_proveedor" method="post" id="form1">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required><br>
+        <label for="direccion">Dirección:</label>
+        <input type="text" id="direccion" name="direccion" required><br>
+        <label for="telefono">Teléfono:</label>
+        <input type="text" id="telefono" name="telefono" required><br><br>
+        <input type="hidden" name="action" value="registrar">
+        <input type="submit" value="Registrar">
+    </form>
+
+    <h2 class="agregar">Agregar Producto al Proveedor</h2>
+    <form action="/registrar_proveedor" method="post" id="form2">
+        <label for="proveedor">Proveedor:</label>
+        <select id="proveedor" name="proveedor" required>
+            {% for prov in proveedores %}
+                <option value="{{ prov.nombre }}">{{ prov.nombre }}</option>
+            {% endfor %}
+        </select><br>
+        <label for="producto">Producto:</label>
+        <input type="text" id="producto" name="producto" required><br><br>
+        <input type="hidden" name="action" value="agregar_producto">
+        <input type="submit" value="Agregar Producto">
+    </form>
+
+    <h2 class="eliminar">Eliminar Producto del Proveedor</h2>
+    <form action="/registrar_proveedor" method="post" id="form3">
+        <label for="proveedor">Proveedor:</label>
+        <select id="proveedor" name="proveedor" required>
+            {% for prov in proveedores %}
+                <option value="{{ prov.nombre }}">{{ prov.nombre }}</option>
+            {% endfor %}
+        </select><br>
+        <label for="producto">Producto:</label>
+        <input type="text" id="producto" name="producto" required><br><br>
+        <input type="hidden" name="action" value="eliminar_producto">
+        <input type="submit" value="Eliminar Producto">
+    </form>
+
+    <h2 class="consultar">Consultar Proveedor</h2>
+    <form action="/registrar_proveedor" method="post" id="form4">
+        <label for="nombre">Nombre del Proveedor:</label>
+        <input type="text" id="nombre" name="nombre" required><br><br>
+        <input type="hidden" name="action" value="consultar">
+        <input type="submit" value="Consultar">
+    </form>
+
+    {% if proveedor %}
+        <h2 class="informacion">Información del Proveedor</h2>
+        <p>Nombre: {{ proveedor.nombre }}</p>
+        <p>Dirección: {{ proveedor.direccion }}</p>
+        <p>Teléfono: {{ proveedor.telefono }}</p>
+        <h3>Productos Suministrados:</h3>
+        <ul>
+            {% for producto in proveedor.productos %}
+                <li>{{ producto }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <p>{{ mensaje }}</p> <!-- Mostrar mensajes de error o éxito -->
+    <a href="/">Volver al inicio</a>
+</body>
+</html>
